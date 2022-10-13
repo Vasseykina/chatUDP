@@ -6,17 +6,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ChatServer extends Thread {
-    public final static int PORT = 7331;
+    private int PORT ;
     private final static int BUFFER = 1024;
 
     private DatagramSocket socket;
     private ArrayList<InetAddress> clientAddresses;
     private ArrayList<Integer> clientPorts;
 
-    public ChatServer() throws IOException {
-        socket = new DatagramSocket(PORT);
+    public ChatServer(int port) throws IOException {
+
+        socket = new DatagramSocket(port);
         clientAddresses = new ArrayList();
         clientPorts = new ArrayList();
+        PORT = port;
     }
 
     public void run() {
@@ -54,7 +56,7 @@ public class ChatServer extends Thread {
 
 
     public static void main(String args[]) throws Exception {
-        ChatServer s = new ChatServer();
+        ChatServer s = new ChatServer(Integer.parseInt(args[1]));
         s.start();
     }
 }

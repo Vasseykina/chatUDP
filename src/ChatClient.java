@@ -11,9 +11,10 @@ public class ChatClient {
         } else {
             host = args[0];
         }
+        int port = Integer.parseInt(args[1]);
         DatagramSocket socket = new DatagramSocket();
         MessageReceiver r = new MessageReceiver(socket);
-        MessageSender s = new MessageSender(socket,7331);
+        MessageSender s = new MessageSender(socket,port);
         Thread rt = new Thread(r);
         Thread st = new Thread(s);
         rt.start();
